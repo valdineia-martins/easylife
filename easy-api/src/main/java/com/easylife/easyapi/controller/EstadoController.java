@@ -27,7 +27,7 @@ public class EstadoController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Estado> alterar(Estado estado){
+    public ResponseEntity<Estado> alterar(@RequestBody Estado estado){
          return ResponseEntity.ok().body(service.alterar(estado));
     }
 
