@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "PESSOA", schema = "EASY_LIFE")
+@Table(name = "PESSOA")
 @NoArgsConstructor
 public class Pessoa {
 
@@ -28,6 +28,7 @@ public class Pessoa {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao")
     private Date dataCriacao;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_atualizacao")
     private Date dataAtualizacao;

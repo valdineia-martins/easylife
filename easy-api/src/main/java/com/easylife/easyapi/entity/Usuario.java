@@ -5,10 +5,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "USUARIO", schema = "EASY_LIFE")
+@Table(name = "USUARIO")
 @NoArgsConstructor
 public class Usuario {
     @Id
@@ -24,8 +25,17 @@ public class Usuario {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao")
     private Date dataCriacao;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_atualizacao")
     private Date dataAtualizacao;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "permissao_usuario",
+            joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_permissao"))
+    private List<Permissao> permissoes;
+
+
 
 }
