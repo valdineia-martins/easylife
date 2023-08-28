@@ -23,6 +23,7 @@ public class PessoaService {
     }
 
     public Pessoa buscarPeloCodigo(Long codigo) {
+
         return pessoaRepository.findById(codigo).get();
     }
 }
