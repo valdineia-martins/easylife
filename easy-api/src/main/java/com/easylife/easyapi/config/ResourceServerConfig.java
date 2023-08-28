@@ -15,6 +15,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers("api/estado/**").permitAll()
                 .antMatchers("/pessoas/**").authenticated()
                 .antMatchers("api/clientes/**").authenticated()
+                .antMatchers("/espacos/**").authenticated()
                 .anyRequest().denyAll();
     }
 }
