@@ -29,6 +29,11 @@ public class SecurityService implements UserDetailsService {
         Usuario usuario = usuarioOptional.orElseThrow(()-> new RuntimeException("Usuario nao encontrado"));
 
          return new User(email, usuario.getSenha(), getPermissoes(usuario));
+        /*return User.builder()
+                .username(usuario.getEmail())
+                .password(usuario.getSenha())
+                .roles("")
+                .build();*/
     }
 
     private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 @NoArgsConstructor
 @Data
@@ -12,8 +13,8 @@ import java.util.Date;
 @Table(name = "ESPACO_COMUM")
 public class EspacoComum {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PESSOA_SEQ")
-    @SequenceGenerator(name = "PESSOA_SEQ", sequenceName = "PESSOA_SEQ", schema = "EASY_LIFE", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ESPACO_COMUM_SEQ")
+    @SequenceGenerator(name = "ESPACO_COMUM_SEQ", sequenceName = "ESPACO_COMUM_SEQ", allocationSize = 1)
     @Column(name = "ID_ESPACO_COMUM")
     private Long id;
 
@@ -21,14 +22,15 @@ public class EspacoComum {
     private String nome;
     private Boolean ativo;
 
-    @Column(name = "DATA_INICIO")
-    private Date dataInicio;
-    @Column(name = "DATA_FINAL")
-    private Date dataFinal;
+    @Column(name = "HORARIO_INICIO")
+    private LocalTime horarioInicio;
+
+    @Column(name = "HORARIO_FINAL")
+    private LocalTime horarioFinal;
 
     private String descricao;
 
-
+    @Column(name = "IMAGEM_UL")
     private String imagem;
 
     @Column(name = "MAXIMO_CONVIDADOS")
