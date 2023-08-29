@@ -1,6 +1,7 @@
 package com.easylife.easyapi.service;
 
 import com.easylife.easyapi.entity.Pessoa;
+import com.easylife.easyapi.exception.NegocioException;
 import com.easylife.easyapi.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,6 @@ public class PessoaService {
     }
 
     public Pessoa buscarPeloCodigo(Long codigo) {
-
-        return pessoaRepository.findById(codigo).get();
+            return pessoaRepository.findById(codigo).orElseThrow(() -> new NegocioException("Pessoa não encontrada com o ID fornecido"));
     }
 }
