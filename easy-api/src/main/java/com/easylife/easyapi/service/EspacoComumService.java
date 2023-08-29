@@ -1,7 +1,7 @@
 package com.easylife.easyapi.service;
 
 import com.easylife.easyapi.entity.EspacoComum;
-import com.easylife.easyapi.entity.Pessoa;
+import com.easylife.easyapi.exception.NegocioException;
 import com.easylife.easyapi.repository.EspacoComumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,6 @@ public class EspacoComumService {
     }
 
     public EspacoComum buscarPeloCodigo(Long codigo) {
-        return espacoComumRepository.findById(codigo).orElse(null);
+        return espacoComumRepository.findById(codigo).orElseThrow(() -> new NegocioException("Pessoa não encontrada com o ID fornecido"));
     }
 }
