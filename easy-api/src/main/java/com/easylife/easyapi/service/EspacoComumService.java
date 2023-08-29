@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EspacoComumService {
@@ -24,5 +25,10 @@ public class EspacoComumService {
 
     public EspacoComum buscarPeloCodigo(Long codigo) {
         return espacoComumRepository.findById(codigo).orElseThrow(() -> new NegocioException("Pessoa não encontrada com o ID fornecido"));
+    }
+
+    public EspacoComum findById(Long id) {
+        Optional<EspacoComum> obj = espacoComumRepository.findById(id);
+        return obj.orElseThrow(() -> new NegocioException("Pessoa não encontrada com o ID fornecido"));
     }
 }

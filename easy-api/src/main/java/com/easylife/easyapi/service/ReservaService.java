@@ -1,10 +1,12 @@
 package com.easylife.easyapi.service;
 
+import com.easylife.easyapi.dto.*;
 import com.easylife.easyapi.entity.EspacoComum;
 import com.easylife.easyapi.entity.Pessoa;
 import com.easylife.easyapi.entity.Reserva;
 import com.easylife.easyapi.exception.NegocioException;
 import com.easylife.easyapi.repository.ReservaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +22,27 @@ public class ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    public Reserva salvarAgenda(Reserva reserva)  {
+    @Autowired
+    private ModelMapper mapper;
+
+    public Reserva salvarAgenda(ReservaDTO reserva)  {
 
         if (reserva == null) {
             throw new NegocioException("A reserva não pode ser nula");
         }
 
-        Pessoa pessoa = pessoaService.buscarPeloCodigo(reserva.getPessoa().getId());
+        PessoaReservaDTO pessoaDTO = mapper.map(pessoaService.findById(reserva.getPessoa().getId()), PessoaReservaDTO.class);
 
-        EspacoComum espacoComum = espacoComumService.buscarPeloCodigo(reserva.getEspacoComum().getId());
+        EspacoComumReservaDTO espacoComumDTO =
+                mapper.map(espacoComumService.findById(reserva.getEspacoComum().getId()), EspacoComumReservaDTO.class);
 
-        Reserva novaReserva = Reserva.builder()
+        ReservaDTO novaReserva = ReservaDTO.builder()
                 .dataReserva(reserva.getDataReserva())
-                .espacoComum(espacoComum)
-                .pessoa(pessoa)
+                .espacoComum(espacoComumDTO)
+                .pessoa(pessoaDTO)
                 .build();
 
-        return reservaRepository.save(novaReserva);
+        return reservaRepository.save(mapper.map(novaReserva, Reserva.class));
     }
 
 }
